@@ -15,7 +15,10 @@ class BasePage():
             return False
         return True
        
-        
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        login_link.click()    
+    
     def go_to_register_page(self):
         register_link = self.browser.find_element(*BasePageLocators.REGISTER_LINK)
         register_link.click()

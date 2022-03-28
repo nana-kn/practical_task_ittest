@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators import RegisterPageLocators
+from .locators import BasePageLocators
 import time
 
 class RegisterPage(BasePage):
@@ -11,7 +12,7 @@ class RegisterPage(BasePage):
         fild_first_name.send_keys(first_name)
         fild_last_name = self.browser.find_element(*RegisterPageLocators.LAST_NAME)
         fild_last_name.send_keys(last_name)
-        fild_email = self.browser.find_element(*RegisterPageLocators.EMAIL)
+        fild_email = self.browser.find_element(*BasePageLocators.EMAIL)
         fild_email.send_keys(email)
         fild_password = self.browser.find_element(*RegisterPageLocators.PASSWORD)
         fild_password.send_keys(password)

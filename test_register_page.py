@@ -124,3 +124,4 @@ class TestRegistration():
         register_page.register_new_user(first_name, last_name, email, password, confirm_password)
         register_page.should_be_unsuccessful_registration_message_Confirm_password_is_required()
         time.sleep(3)
+        
