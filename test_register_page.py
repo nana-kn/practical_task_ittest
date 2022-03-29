@@ -1,4 +1,4 @@
-from .register_page import RegisterPage
+from .pages.register_page import RegisterPage
 import time
 
 
