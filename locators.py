@@ -10,6 +10,7 @@ class LoginPageLocators():
     BUTTON_TO_LOGIN = (By.CSS_SELECTOR, ".button-1.login-button")
     FORM_Returning_Customer = (By.XPATH, '//strong[text() = "Returning Customer"]')
     USER = (By.CSS_SELECTOR, ".account")
+    MESSAGE_ERROR = (By.CSS_SELECTOR, '.validation-summary-errors span')
         
   
 class RegisterPageLocators():

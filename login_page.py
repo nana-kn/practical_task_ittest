@@ -25,3 +25,8 @@ class LoginPage(BasePage):
 
     def should_be_authorized_user(self, email):
         assert email == self.browser.find_element(*LoginPageLocators.USER).text, "Пользователь не авторизован"
+
+    def should_be_unsuccessful_login(self):
+        result = self.browser.find_element(*LoginPageLocators.MESSAGE_ERROR).text
+        message_error = "Login was unsuccessful. Please correct the errors and try again."
+        assert message_error == result, "Пользователь авторизован!"

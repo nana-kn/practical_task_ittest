@@ -13,3 +13,24 @@ class TestAuthorization():
         login_page.login_user(email, password)
         login_page.should_be_authorized_user(email)
     
+    # указан неверный пароль
+    def test_guest_can_not_login_wrong_password(self, browser):
+        link = "http://demowebshop.tricentis.com/login"
+        email = "Katerina_Popova@fakemail.org"
+        password = '123456_Itetst'
+       
+        login_page = LoginPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        login_page.open()                                  # открываем страницу
+        login_page.login_user(email, password)
+        login_page.should_be_unsuccessful_login()
+
+    # данные не введены
+    def test_guest_can_not_login_no_data_entered(self, browser):
+        link = "http://demowebshop.tricentis.com/login"
+        email = ""
+        password = ''
+       
+        login_page = LoginPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        login_page.open()                                  # открываем страницу
+        login_page.login_user(email, password)
+        login_page.should_be_unsuccessful_login()

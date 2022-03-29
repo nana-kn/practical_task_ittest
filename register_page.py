@@ -14,7 +14,7 @@ class RegisterPage(BasePage):
         fild_last_name.send_keys(last_name)
         fild_email = self.browser.find_element(*BasePageLocators.EMAIL)
         fild_email.send_keys(email)
-        fild_password = self.browser.find_element(*RegisterPageLocators.PASSWORD)
+        fild_password = self.browser.find_element(*BasePageLocators.PASSWORD)
         fild_password.send_keys(password)
         fild_password_confirm = self.browser.find_element(*RegisterPageLocators.CONFIRM_PASSWORD)
         fild_password_confirm.send_keys(confirm_password)
