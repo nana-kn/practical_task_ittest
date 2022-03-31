@@ -6,10 +6,12 @@ class BasePageLocators():
     EMAIL = (By.ID, "Email")
     PASSWORD = (By.ID, "Password")
 
+
 class LoginPageLocators():
     BUTTON_TO_LOGIN = (By.CSS_SELECTOR, ".button-1.login-button")
     FORM_Returning_Customer = (By.XPATH, '//strong[text() = "Returning Customer"]')
     USER = (By.CSS_SELECTOR, ".account")
+    LINK = "http://demowebshop.tricentis.com/login"
     MESSAGE_ERROR = (By.CSS_SELECTOR, '.validation-summary-errors span')
         
   
@@ -25,7 +27,10 @@ class RegisterPageLocators():
     GENDER = (By.ID, "gender-female")
     LAST_NAME = (By.ID, "LastName")
     LAST_NAME_IS_REQUIRED = (By.XPATH, "//span[@for = 'LastName']")
+    LINK = "http://demowebshop.tricentis.com/register"
     PASSWORD_IS_REQUIRED = (By.XPATH, "//span[@for = 'Password']")
     RESULT_OF_REGISTER = (By.CLASS_NAME, "result")
+    RE_REGISTRATION = (By.CSS_SELECTOR, '.validation-summary-errors ul li')
+    
      
     

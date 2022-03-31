@@ -1,6 +1,7 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
 from .locators import BasePageLocators
+from ..test_data.users import TestUser
 import time
 
 class LoginPage(BasePage):
@@ -23,10 +24,14 @@ class LoginPage(BasePage):
     def should_be_form_Returning_Customer(self):   
         assert self.is_element_present(*LoginPageLocators.FORM_Returning_Customer), 'Форма "Returning Customer" отсутствует' 
 
-    def should_be_authorized_user(self, email):
-        assert email == self.browser.find_element(*LoginPageLocators.USER).text, "Пользователь не авторизован"
+    def should_be_authorized_user(self,users: TestUser):
+        assert users.email == self.browser.find_element(*LoginPageLocators.USER).text, "Пользователь не авторизован"
 
     def should_be_unsuccessful_login(self):
-        result = self.browser.find_element(*LoginPageLocators.MESSAGE_ERROR).text
-        message_error = "Login was unsuccessful. Please correct the errors and try again."
-        assert message_error == result, "Пользователь авторизован!"
+        self.should_be_unsuccessful_message()
+        result = self.browser.find_element(*LoginPageLocators.MESSAGE_ERROR)
+        assert result, "Пользователь авторизован!"
+
+    def should_be_unsuccessful_message(self):
+        message_error = self.is_element_present(*LoginPageLocators.MESSAGE_ERROR)
+        assert message_error, "Пользователь авторизован!"

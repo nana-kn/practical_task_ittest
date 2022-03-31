@@ -1,127 +1,120 @@
 from .pages.register_page import RegisterPage
+from .pages.locators import RegisterPageLocators
 import time
+import pytest
+from .test_data.users import User_Successful, User_Wrong, User_Name, User_Sername, User_Email, User_Wrong_Email, User_Wrong_Email2, User_Password, User_Confirm_Password, User_Empty, User_re_registration
 
-
-class TestRegistration():   
-    #тест на успешную регистрацию
-    def test_guest_can_register(self, browser):
-        link = "http://demowebshop.tricentis.com/register"
-        first_name = "Ekaterina"
-        last_name = "Popova"
-        email = str(time.time()) + "@fakemail.org"
-        password = str(time.time()) + "_Itetst"
+class TestRegistration():
        
-        register_page = RegisterPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
-        register_page.open()                                     # открываем страницу
+    # тест на успешную регистрацию
+    @pytest.mark.need_review
+    def test_guest_can_register(self, browser):      
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
         register_page.should_be_elements_for_register()
-        register_page.register_new_user(first_name, last_name, email, password, password)
+        register_page.register_new_user(User_Successful)
         register_page.should_be_successful_registration_message()
         
         
     # пароли не совпадают
+    @pytest.mark.need_review
     def test_guest_can_not_register_passwords_do_not_match(self, browser):
-        link = "http://demowebshop.tricentis.com/register"
-        first_name = "Ekaterina"
-        last_name = "Popova"
-        email = str(time.time()) + "@fakemail.org"
-        password = str(time.time()) + "_Itetst"
-        confirm_password = str(time.time()) + "_Itetst1"
-       
-        register_page = RegisterPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
-        register_page.open()                                     # открываем страницу
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
         register_page.should_be_elements_for_register()
-        register_page.register_new_user(first_name, last_name, email, password, confirm_password)
+        register_page.register_new_user(User_Wrong)
         register_page.should_be_unsuccessful_registration_message_passwords_do_not_match()
         
         
     # Имя пользователя не указано
+    @pytest.mark.need_review
     def test_guest_can_not_register_First_name_is_required(self, browser):
-        link = "http://demowebshop.tricentis.com/register"
-        first_name = ""
-        last_name = "Popova"
-        email = str(time.time()) + "@fakemail.org"
-        password = str(time.time()) + "_Itetst"
-       
-        register_page = RegisterPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
-        register_page.open()                                     # открываем страницу
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
         register_page.should_be_elements_for_register()
-        register_page.register_new_user(first_name, last_name, email, password, password)
+        register_page.register_new_user(User_Name)
         register_page.should_be_unsuccessful_registration_message_First_name_is_required()
-        time.sleep(3)
         
+
     # Фамилия пользователя не указана
+    @pytest.mark.need_review
     def test_guest_can_not_register_Last_name_is_required(self, browser):
-        link = "http://demowebshop.tricentis.com/register"
-        first_name = "Ekaterina"
-        last_name = ""
-        email = str(time.time()) + "@fakemail.org"
-        password = str(time.time()) + "_Itetst"
-       
-        register_page = RegisterPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
-        register_page.open()                                     # открываем страницу
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
         register_page.should_be_elements_for_register()
-        register_page.register_new_user(first_name, last_name, email, password, password)
+        register_page.register_new_user(User_Sername)
         register_page.should_be_unsuccessful_registration_message_Last_name_is_required()
-        time.sleep(3)
         
-        #Почта не указана
+    
+    # Почта не указана
+    @pytest.mark.need_review
     def test_guest_can_not_register_Email_name_is_required(self, browser):
-        link = "http://demowebshop.tricentis.com/register"
-        first_name = "Ekaterina"
-        last_name = "Popova"
-        email = ""
-        password = str(time.time()) + "_Itetst"
-       
-        register_page = RegisterPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
-        register_page.open()                                     # открываем страницу
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
         register_page.should_be_elements_for_register()
-        register_page.register_new_user(first_name, last_name, email, password, password)
+        register_page.register_new_user(User_Email)
         register_page.should_be_unsuccessful_registration_message_Email_is_required()
-        time.sleep(3)
-        
-    #Неверный формат почты
+
+
+    # Неверный формат почты (не указана @)
+    @pytest.mark.need_review
     def test_guest_can_not_register_Wrong_email(self, browser):
-        link = "http://demowebshop.tricentis.com/register"
-        first_name = "Ekaterina"
-        last_name = "Popova"
-        email = str(time.time())
-        password = str(time.time()) + "_Itetst"
-       
-        register_page = RegisterPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
-        register_page.open()                                     # открываем страницу
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)         # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                     # открываем страницу
         register_page.should_be_elements_for_register()
-        register_page.register_new_user(first_name, last_name, email, password, password)
-        register_page.should_be_unsuccessful_registration_message_Wrong_email()
-        time.sleep(3)    
+        register_page.register_new_user(User_Wrong_Email)
+        register_page.should_be_unsuccessful_registration_message_Wrong_email()    
+
+
+    # Неверный формат почты (не указана .)
+    @pytest.mark.need_review
+    def test_guest_can_not_register_Wrong_email2(self, browser):
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)         # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                     # открываем страницу
+        register_page.should_be_elements_for_register()
+        register_page.register_new_user(User_Wrong_Email2)
+        register_page.should_be_unsuccessful_registration_message_Wrong_email()    
+    
         
     # Пароль не указан
+    @pytest.mark.need_review
     def test_guest_can_not_register_Password_is_required(self, browser):
-        link = "http://demowebshop.tricentis.com/register"
-        first_name = "Ekaterina"
-        last_name = "Popova"
-        email = str(time.time()) + "@fakemail.org"
-        password = ""
-       
-        register_page = RegisterPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
-        register_page.open()                                     # открываем страницу
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
         register_page.should_be_elements_for_register()
-        register_page.register_new_user(first_name, last_name, email, password, password)
+        register_page.register_new_user(User_Password)
         register_page.should_be_unsuccessful_registration_message_Password_is_required()
-        time.sleep(3)
-        
-     # Пароль для подтверждения не указан
+
+
+    # Пароль для подтверждения не указан
+    @pytest.mark.need_review
     def test_guest_can_not_register_Confirm_password_is_required(self, browser):
-        link = "http://demowebshop.tricentis.com/register"
-        first_name = "Ekaterina"
-        last_name = "Popova"
-        email = str(time.time()) + "@fakemail.org"
-        password = str(time.time()) + "_Itetst"
-        confirm_password = ""
-       
-        register_page = RegisterPage(browser, link)              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
-        register_page.open()                                     # открываем страницу
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
         register_page.should_be_elements_for_register()
-        register_page.register_new_user(first_name, last_name, email, password, confirm_password)
+        register_page.register_new_user(User_Confirm_Password)
         register_page.should_be_unsuccessful_registration_message_Confirm_password_is_required()
-        time.sleep(3)
+
+
+    # Поля не заполнены
+    def test_guest_can_not_register_Form_is_empty(self, browser):
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
+        register_page.should_be_elements_for_register()
+        register_page.register_new_user(User_Empty)
+        register_page.should_be_unsuccessful_registration_message_First_name_is_required()
+
+
+    # Повторная регистрация
+    @pytest.mark.need_review
+    def test_guest_can_not_register_re_registration(self, browser):
+        register_page = RegisterPage(browser, RegisterPageLocators.LINK)        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        register_page.open()                                                    # открываем страницу
+        register_page.should_be_elements_for_register()
+        register_page.register_new_user(User_Successful)
+        time.sleep(15)
+        register_page.should_be_unsuccessful_registration_message_re_registration()
+
+
+
         
