@@ -12,6 +12,12 @@ class  TestUser:
     password: str
     confirm_password: str
 
+@dataclass(frozen=True)
+class ChangePassword:
+    password: str
+    confirm_password: str
+
+
 first_name = faker.first_name()
 last_name = faker.last_name()
 email = faker.email()
@@ -29,6 +35,9 @@ User_Password = TestUser(first_name, last_name, email, '', '')
 User_Confirm_Password = TestUser(first_name, last_name, email, password, '')
 User_Empty = TestUser('', '', '', '', '')
 User_re_registration = TestUser(first_name, last_name, email, password, password)
+
+ChangePassword_Successful = ChangePassword(password, password)
+
 
 
 

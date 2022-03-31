@@ -6,6 +6,14 @@ class BasePageLocators():
     EMAIL = (By.ID, "Email")
     PASSWORD = (By.ID, "Password")
 
+class ChangePasswordPageLocators():
+    LINK = "http://demowebshop.tricentis.com/customer/changepassword"
+    OLD_PASSWORD = (By.ID, "OldPassword")
+    NEW_PASSWORD = (By.ID, "NewPassword")
+    CONFIRM_NEW_PASSWORD = (By.ID, "ConfirmNewPassword")
+    BUTTON_CHANGE = (By.XPATH, "//input[@value = 'Change password']")
+    RESULT_OF_CHANGE_PASSWORD = (By.XPATH, "//div[@class = 'result']")
+
 
 class LoginPageLocators():
     BUTTON_TO_LOGIN = (By.CSS_SELECTOR, ".button-1.login-button")
