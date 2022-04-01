@@ -49,7 +49,7 @@ class RegisterPage(BasePage):
         assert self.is_element_present(*RegisterPageLocators.LAST_NAME_IS_REQUIRED), "Регистрация прошла успешно! Фамилия пользователя указано!"
 
     def should_be_not_password(self):
-        assert self.is_element_present(*RegisterPageLocators.PASSWORD_IS_REQUIRED), "Регистрация прошла успешно! Пароль указан!"        
+        assert self.is_element_present(*RegisterPageLocators.PASSWORD_WRONG), "Регистрация прошла успешно! Пароль указан и соответствует заданному формату!"        
 
     def should_be_not_re_registration(self):
         assert self.is_element_present(*RegisterPageLocators.RE_REGISTRATION), 'Повторная регистрация прошла успешно! '
@@ -84,8 +84,15 @@ class RegisterPage(BasePage):
         
     def should_be_unsuccessful_registration_message_Password_is_required(self):
         self.should_be_not_password()
-        result = self.browser.find_element(*RegisterPageLocators.PASSWORD_IS_REQUIRED)
+        result = self.browser.find_element(*RegisterPageLocators.PASSWORD_WRONG)
         assert result, "Регистрация прошла успешно! Пароль указан!" 
+
+
+    def should_be_unsuccessful_registration_message_Password_is_wrong(self):
+        self.should_be_not_password()
+        result = self.browser.find_element(*RegisterPageLocators.PASSWORD_WRONG)
+        assert result, "Регистрация прошла успешно! Пароль соответствует заданному формату!" 
+
 
     def should_be_unsuccessful_registration_message_passwords_do_not_match(self):
         self.should_be_passwords_do_not_match()
@@ -100,6 +107,7 @@ class RegisterPage(BasePage):
     def should_be_unsuccessful_registration_message_Wrong_email(self):
         result = self.browser.find_element(*RegisterPageLocators.EMAIL_ERROR)
         assert result, "Регистрация прошла успешно! Почта указана верно!"   
+   
         
     
         

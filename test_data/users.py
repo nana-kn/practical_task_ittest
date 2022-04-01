@@ -32,11 +32,15 @@ User_Email = TestUser(first_name, last_name, '', password, password)
 User_Wrong_Email = TestUser(first_name, last_name, 'wrong', password, password)
 User_Wrong_Email2 = TestUser(first_name, last_name, 'wrong@mail', password, password)
 User_Password = TestUser(first_name, last_name, email, '', '')
+User_Wrong_Password = TestUser(first_name, last_name, email, '123', '123')
 User_Confirm_Password = TestUser(first_name, last_name, email, password, '')
 User_Empty = TestUser('', '', '', '', '')
-User_re_registration = TestUser(first_name, last_name, email, password, password)
 
 ChangePassword_Successful = ChangePassword(password, password)
+ChangePassword_Wrong = ChangePassword(password, confirm_password)
+ChangePassword_Wrong_Format = ChangePassword('123', '123')
+ChangePassword_Confirm_Password = ChangePassword(password, '')
+ChangePassword_Password = ChangePassword('', '')
 
 
 

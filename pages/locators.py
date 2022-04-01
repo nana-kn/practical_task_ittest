@@ -1,26 +1,30 @@
 from selenium.webdriver.common.by import By
 
 class BasePageLocators():
-    REGISTER_LINK = (By.CSS_SELECTOR, ".ico-register")
-    LOGIN_LINK = (By.CSS_SELECTOR, ".ico-login")
     EMAIL = (By.ID, "Email")
+    LOGIN_LINK = (By.CSS_SELECTOR, ".ico-login")
     PASSWORD = (By.ID, "Password")
+    REGISTER_LINK = (By.CSS_SELECTOR, ".ico-register")
 
 class ChangePasswordPageLocators():
-    LINK = "http://demowebshop.tricentis.com/customer/changepassword"
-    OLD_PASSWORD = (By.ID, "OldPassword")
-    NEW_PASSWORD = (By.ID, "NewPassword")
-    CONFIRM_NEW_PASSWORD = (By.ID, "ConfirmNewPassword")
     BUTTON_CHANGE = (By.XPATH, "//input[@value = 'Change password']")
+    CONFIRM_NEW_PASSWORD = (By.ID, "ConfirmNewPassword")
+    LINK = "http://demowebshop.tricentis.com/customer/changepassword"
+    NEW_PASSWORD = (By.ID, "NewPassword")
+    OLD_PASSWORD = (By.ID, "OldPassword")
+    OLD_PASSWORD_IS_REQUIRED = (By.XPATH, "//span[@for =  'OldPassword']")
+    PASSWORDS_DO_NOT_MATCH = (By.XPATH, "//span[@for = 'ConfirmNewPassword']")
     RESULT_OF_CHANGE_PASSWORD = (By.XPATH, "//div[@class = 'result']")
-
+    WRONG_NEW_PASSWORD = (By.XPATH, "//span[@for = 'NewPassword']")
+    WRONG_OLD_PASSWORD = (By.XPATH, "//div[@class = 'validation-summary-errors']/ul/li")
+    
 
 class LoginPageLocators():
     BUTTON_TO_LOGIN = (By.CSS_SELECTOR, ".button-1.login-button")
     FORM_Returning_Customer = (By.XPATH, '//strong[text() = "Returning Customer"]')
-    USER = (By.CSS_SELECTOR, ".account")
     LINK = "http://demowebshop.tricentis.com/login"
     MESSAGE_ERROR = (By.CSS_SELECTOR, '.validation-summary-errors span')
+    USER = (By.CSS_SELECTOR, ".account")
         
   
 class RegisterPageLocators():
@@ -36,7 +40,7 @@ class RegisterPageLocators():
     LAST_NAME = (By.ID, "LastName")
     LAST_NAME_IS_REQUIRED = (By.XPATH, "//span[@for = 'LastName']")
     LINK = "http://demowebshop.tricentis.com/register"
-    PASSWORD_IS_REQUIRED = (By.XPATH, "//span[@for = 'Password']")
+    PASSWORD_WRONG = (By.XPATH, "//span[@for = 'Password']")
     RESULT_OF_REGISTER = (By.CLASS_NAME, "result")
     RE_REGISTRATION = (By.CSS_SELECTOR, '.validation-summary-errors ul li')
     
