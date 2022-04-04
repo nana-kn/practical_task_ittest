@@ -1,5 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
 from .locators import BasePageLocators
+from .locators import LoginPageLocators
+from ..test_data.users import TestUser
 
 class BasePage():
     def __init__(self, browser, url, timeout=5):
@@ -24,6 +26,9 @@ class BasePage():
     
     def open(self):
         self.browser.get(self.url)
+
+    def should_be_authorized_user(self,users: TestUser):
+        assert users.email == self.browser.find_element(*LoginPageLocators.USER).text, "Пользователь не авторизован"
         
     
         

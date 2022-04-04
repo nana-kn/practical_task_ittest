@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 class BasePageLocators():
+    LINK = "http://demowebshop.tricentis.com/"
     EMAIL = (By.ID, "Email")
     LOGIN_LINK = (By.CSS_SELECTOR, ".ico-login")
     PASSWORD = (By.ID, "Password")
@@ -24,8 +25,9 @@ class LoginPageLocators():
     FORM_Returning_Customer = (By.XPATH, '//strong[text() = "Returning Customer"]')
     LINK = "http://demowebshop.tricentis.com/login"
     MESSAGE_ERROR = (By.CSS_SELECTOR, '.validation-summary-errors span')
-    USER = (By.CSS_SELECTOR, ".account")
+    USER = (By.CSS_SELECTOR, " .header-links li .account")
     EMAIL_IS_WRONG = (By.CSS_SELECTOR, ".field-validation-error span")
+    REMEMBER = (By.ID, "RememberMe")
         
   
 class RegisterPageLocators():
