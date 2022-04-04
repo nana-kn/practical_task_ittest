@@ -39,11 +39,14 @@ def browser(request):
        
         elif browser_name == 'firefox':
             print('\n\nFirefox browser')
-            fp = webdriver.FirefoxProfile()
-            fp.set_preference("intl.accept_languages", language_name)
+            #fp = webdriver.FirefoxProfile()
+            #fp.set_preference("intl.accept_languages", language_name)
+            options = webdriver.FirefoxOptions()
+            options.set_preference("intl.accept_languages", language_name)
             if headless == "yes":   
-                fp.headless = True
-            browser = webdriver.Firefox(firefox_profile=fp)
+                options.add_argument('--headless')
+            browser = webdriver.Firefox(options=options)
+           # browser = webdriver.Firefox(firefox_profile=fp, options=options)
         else: print("Browser is not implemented")      
     else:
         joined_browsers = ', '.join(supported_browsers.keys())
@@ -53,7 +56,3 @@ def browser(request):
     print("\nquit browser..")
     browser.quit()
     
-    
-
-
-

@@ -43,6 +43,7 @@ class TestAuthorization():
         login_page.login_user(User_Empty.email, User_Empty.password)
         login_page.should_be_unsuccessful_login()
 
+
     @pytest.mark.need_review
     # указан невалидный адрес (отсутствует .)
     def test_guest_can_not_login_email_is_wrong(self, browser):       
