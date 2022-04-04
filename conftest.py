@@ -14,12 +14,15 @@ def pytest_addoption(parser):
                      help="Choose browser: chrome or firefox")
     parser.addoption('--language', action='store', default='en',
                      help="Interface language: Russian or English")
+    parser.addoption('--headless', action='store', default = 'no',
+                     help="Headless or not")
 
 
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     language_name = request.config.getoption("language")
+    headless = request.config.getoption("headless")
 
     if browser_name in supported_browsers:
         browser = supported_browsers.get(browser_name)()
@@ -29,12 +32,17 @@ def browser(request):
         
             options = Options()
             options.add_experimental_option('prefs', {'intl.accept_languages': language_name})
+            if headless == "yes":
+                options.headless = True
+            
             browser = webdriver.Chrome(options=options)
+       
         elif browser_name == 'firefox':
             print('\n\nFirefox browser')
-        
             fp = webdriver.FirefoxProfile()
             fp.set_preference("intl.accept_languages", language_name)
+            if headless == "yes":   
+                fp.headless = True
             browser = webdriver.Firefox(firefox_profile=fp)
         else: print("Browser is not implemented")      
     else:

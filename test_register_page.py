@@ -1,11 +1,10 @@
 from .pages.register_page import RegisterPage
 from .pages.locators import RegisterPageLocators
 import time
-import pytest
 from .test_data.users import User_Successful, User_Wrong, User_Name, User_Sername, User_Email, User_Wrong_Email, User_Wrong_Email2, User_Password, User_Confirm_Password, User_Empty, User_Wrong_Password
+import pytest
 
-class TestRegistration():
-       
+class TestRegistration():    
     # тест на успешную регистрацию
     @pytest.mark.need_review
     def test_guest_can_register(self, browser):      

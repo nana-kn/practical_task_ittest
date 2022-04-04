@@ -1,7 +1,6 @@
 from .base_page import BasePage
 from .locators import RegisterPageLocators
 from .locators import BasePageLocators
-import time
 from ..test_data.users import TestUser
 
 class RegisterPage(BasePage):

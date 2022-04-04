@@ -2,7 +2,6 @@ from .base_page import BasePage
 from .locators import LoginPageLocators
 from .locators import BasePageLocators
 from ..test_data.users import TestUser
-import time
 
 class LoginPage(BasePage):
      

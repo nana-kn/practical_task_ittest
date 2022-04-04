@@ -1,6 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
 from .locators import BasePageLocators
-import time
 
 class BasePage():
     def __init__(self, browser, url, timeout=5):
