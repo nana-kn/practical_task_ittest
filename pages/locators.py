@@ -25,6 +25,7 @@ class LoginPageLocators():
     LINK = "http://demowebshop.tricentis.com/login"
     MESSAGE_ERROR = (By.CSS_SELECTOR, '.validation-summary-errors span')
     USER = (By.CSS_SELECTOR, ".account")
+    EMAIL_IS_WRONG = (By.CSS_SELECTOR, ".field-validation-error span")
         
   
 class RegisterPageLocators():

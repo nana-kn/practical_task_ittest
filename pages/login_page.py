@@ -26,11 +26,21 @@ class LoginPage(BasePage):
     def should_be_authorized_user(self,users: TestUser):
         assert users.email == self.browser.find_element(*LoginPageLocators.USER).text, "Пользователь не авторизован"
 
+    def should_be_unsuccessful_message(self):
+        message_error = self.is_element_present(*LoginPageLocators.MESSAGE_ERROR)
+        assert message_error, "Пользователь авторизован!"
+    
     def should_be_unsuccessful_login(self):
         self.should_be_unsuccessful_message()
         result = self.browser.find_element(*LoginPageLocators.MESSAGE_ERROR)
         assert result, "Пользователь авторизован!"
 
-    def should_be_unsuccessful_message(self):
-        message_error = self.is_element_present(*LoginPageLocators.MESSAGE_ERROR)
+
+    def should_be_unsuccessful_message_email_is_wrong(self):
+        message_error = self.is_element_present(*LoginPageLocators.EMAIL_IS_WRONG)
         assert message_error, "Пользователь авторизован!"
+
+    def should_be_unsuccessful_login_email_is_wrong(self):
+        self.should_be_unsuccessful_message_email_is_wrong()
+        result = self.browser.find_element(*LoginPageLocators.EMAIL_IS_WRONG)
+        assert result, "Пользователь авторизован! Email указан верно!"
